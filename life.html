@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous">
+		</script>
+		<!-- -->
+		<!--
+		<script src="jquery.js"></script>
+		<!-- -->
+		<style>
+			#board{
+				cursor: crosshair;
+				border: 1px solid #aaa;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			Wikipedia Hashes:
+
+				Simkin Glider Gun:
+				<11919>1wM<64>63<132>6<66>o<335>6M<65>ww<64>21c<64>e8M<64>1<265>6<66>g<66>V<66>w<10>
+
+				Endless 1:
+				<8853>2<66>I<65>2w<65>8<65>2<66>E<4147>
+
+				Endless 2:
+				<6095>t<65>1<67>M<65>d<65>1k<6971>
+
+				Endless 3:
+				<5548>3#v7<1>#Lw<7778>
+
+				R-Pentomino:
+				<5634>c<65>1w<65>2<7566>
+
+				Die Hard:
+				<6093>2<65>c<66>hM<7106>
+		 -->
+
+		<div style="margin: 0 auto; width: 98vw; display: flex; justify: center">
+			<div style="margin: 0 auto; flex: 0 1 auto">
+				<canvas
+					id="board"
+					width="1200"
+					height="600"
+				></canvas>
+			</div>
+		</div>
+		<div style="margin: 0 auto; width: 98vw; border 1px solid transparent">
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly;">
+				<p id="population">Population: </p>
+				<p><input type="checkbox" id="wrap" value="false" onchange="toggleWrap()"/> Wrap?</p>
+				<p id="iteration">Iteration: </p>
+			</div>
+			<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-evenly;">
+				<div style="display:flex; flex-direction: column; justify-content: space-evenly;">
+					<button onclick="showSeed()">Show Seed</button>
+					<button onclick="showState()">Show Current World State</button>
+				</div>
+				<div style="display:flex; flex-direction: column; justify-content: space-evenly;">
+					<div style="margin: 0 auto;">
+						<p>Wrap Directions:<p>
+						<div>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_north_west" value="true" onchange="toggleWrap('wrap_north_west')"/>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_north" value="true" onchange="toggleWrap('wrap_north')"/>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_north_east" value="true" onchange="toggleWrap('wrap_north_east')"/>
+						</div>
+						<div>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_west" value="true" onchange="toggleWrap('wrap_west')"/>
+							<input disabled type="checkbox" id="filler" value="false"/>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_east" value="true" onchange="toggleWrap('wrap_east')"/>
+						</div>
+						<div>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_south_west" value="true" onchange="toggleWrap('wrap_south_west')"/>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_south" value="true" onchange="toggleWrap('wrap_south')"/>
+							<input class="dir_wrap" disabled type="checkbox" id="wrap_south_east" value="true" onchange="toggleWrap('wrap_south_east')"/>
+						</div>
+					</div>
+				</div>
+				<div style="display:flex; flex-direction: column; justify-content: space-evenly;">
+					<button onclick="generateStructures()">New Seed</button>
+					<button onclick="loadSeed()">Load Seed</button>
+				</div>
+			</div>
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly;">
+				<button onclick="toggle()">Start/Stop</button>
+				<button onclick="makeGGG()">Gosper's Glider Gun!</button>
+			</div>
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly; align-children: center">
+				<span><input type="range" id="speed" name="speed" min="0" max="990" value="900" step="10" onchange="updateSpeed(this)"/> Speed</span>
+			</div>
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly; align-children: center">
+				<span><button type="button" id="clear" onclick="clearBoard()">Clear</button></span>
+				<span><input type="checkbox" id="track_hist" onclick="toggleStabilityCheck()"/>Stop if Stable</span>
+			</div>
+			<!--
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly; align-children: center">
+			</div>
+			<!-- -->
+			<!--
+			<div style="display:flex; flex-direction: row; justify-content: space-evenly; align-children: center">
+				<textarea id="seedInput" rows="10" cols="150" placeholder="Paste Seed Here!"></textarea>
+			</div>
+			<!-- -->
+			<script src="life.js"></script>
+		</div>
+	</body>
+</html>
